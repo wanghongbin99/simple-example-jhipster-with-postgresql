@@ -1,7 +1,6 @@
 FROM ubuntu:bionic as BUILD
 
 RUN \
-  # configure the "jhipster" user
   groupadd jhipster && \
   useradd jhipster -s /bin/bash -m -g jhipster -G sudo && \
   echo 'jhipster:jhipster' |chpasswd && \
@@ -11,11 +10,8 @@ RUN \
   apt-get install -y \
     wget \
     curl \
-    vim \
-    git \
     zip \
     bzip2 \
-    fontconfig \
     python \
     g++ \
     libpng-dev \
@@ -48,10 +44,6 @@ RUN \
     /tmp/* \
     /var/tmp/*
 
-RUN apt-get clean && apt-get update && apt-get install -y locales
-RUN locale-gen en_US.UTF-8
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
-
 # copy sources
 COPY . /home/jhipster/generator-jhipster/
 
@@ -74,9 +66,8 @@ RUN \
     /var/tmp/*
 
 # build executable jar
-RUN chmod 777 /home/jhipster/generator-jhipster/gradlew
-RUN ls /home/jhipster/generator-jhipster
 WORKDIR /home/jhipster/generator-jhipster
+RUN chmod 777 gradlew
 RUN npm install
 RUN ./gradlew build
 
@@ -86,7 +77,6 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JHIPSTER_SLEEP=0 \
     JAVA_OPTS=""
 
-# Add a jhipster user to run our application so that it doesn't need to run as root
 RUN adduser --home /home/jhipster --disabled-password jhipster
 
 WORKDIR /home/jhipster
