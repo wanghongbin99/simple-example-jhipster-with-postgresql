@@ -36,18 +36,10 @@ const swaggerItem = (
   </MenuItem>
 );
 
-const databaseItem = (
-  <DropdownItem tag="a" href="./h2-console" target="_tab">
-    <FontAwesomeIcon icon="hdd" fixedWidth /> <Translate contentKey="global.menu.admin.database">Database</Translate>
-  </DropdownItem>
-);
-
-export const AdminMenu = ({ showSwagger, showDatabase }) => (
+export const AdminMenu = ({ showSwagger }) => (
   <NavDropdown icon="user-plus" name={translate('global.menu.admin.main')} style={{ width: '140%' }} id="admin-menu">
     {adminMenuItems}
     {showSwagger && swaggerItem}
-
-    {showDatabase && databaseItem}
   </NavDropdown>
 );
 
