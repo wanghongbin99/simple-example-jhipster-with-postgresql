@@ -95,7 +95,7 @@ ADD src/main/jib/entrypoint.sh entrypoint.sh
 RUN chmod 755 entrypoint.sh && chown jhipster:jhipster entrypoint.sh
 USER jhipster
 
-ADD build/libs/qovery-jhipster-postgresql-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=BUILD /home/jhipster/generator-jhipster/build/libs/qovery-jhipster-postgresql-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["./entrypoint.sh"]
