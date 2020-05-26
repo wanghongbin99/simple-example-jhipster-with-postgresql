@@ -37,9 +37,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/qoveryJhipsterPostgresql
-    username: qoveryJhipsterPostgresql
-    password:
+    url: jdbc:${QOVERY_DATABASE_MY_DB_CONNECTION_URI_WITHOUT_CREDENTIALS}
+    username: ${QOVERY_DATABASE_MY_DB_USERNAME}
+    password: ${QOVERY_DATABASE_MY_DB_PASSWORD}
     hikari:
       poolName: Hikari
       auto-commit: false
